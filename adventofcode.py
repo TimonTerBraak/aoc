@@ -34,9 +34,9 @@ class Puzzle:
         print(f'Ex.  1: {ans}')
         ans = self.part1.solve(os.path.join(self.year, self.day, 'input1.txt'))
         print(f'Part 1: {ans}')
-        ans = self.part1.solve(os.path.join(self.year, self.day, 'example2.txt'))
-        print(f'Ex.  2:')
-        ans = self.part1.solve(os.path.join(self.year, self.day, 'input2.txt'))
+        ans = self.part2.solve(os.path.join(self.year, self.day, 'example2.txt'))
+        print(f'Ex.  2: {ans}')
+        ans = self.part2.solve(os.path.join(self.year, self.day, 'input2.txt'))
         print(f'Part 2: {ans}')
 
 
