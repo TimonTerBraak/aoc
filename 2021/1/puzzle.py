@@ -1,40 +1,20 @@
-from adventofcode import Puzzle, Part
+from adventofcode import Puzzle, Part, LineReader
 import sys
 
 class Part1(Part):
 
-    def __init__(self):
-        ...
-
     def solve(self, inputfile):
-        count = 0
-        with open(inputfile, "r") as f:
-            previous_depth = 999999999999999
-            for l in f.readlines():
-                depth = int(l.rstrip('\n'))
-                if depth > previous_depth:
-                    count = count + 1
-                previous_depth = depth
-            
-        return count
+        with LineReader(inputfile).integers() as lines:
+            pairs = zip(lines, lines[1:])
+            return sum([1 if i < j else 0 for i, j in pairs])
 
 
 class Part2(Part):
 
-    def __init__(self):
-        ...
-
     def solve(self, inputfile):
         count = 0
-        with open(inputfile, "r") as f:
-            lines = f.read().split('\n')[:-1]
-            previous_sum = 999999999999999
-            for x, n in enumerate(lines[2:], start=2):
-                a = int(lines[x - 2])
-                b = int(lines[x - 1])
-                c = int(lines[x - 0])
-                if (a + b + c) > previous_sum:
-                    count = count + 1
-                previous_sum = a + b + c
-            
-        return count
+        with LineReader(inputfile).integers() as lines:
+            quads = zip(lines, lines[1:], lines[2:], lines[3:])
+            return sum([1 if (b + c + d) > (a + b + c) else 0 for a, b, c, d in quads])
+
+

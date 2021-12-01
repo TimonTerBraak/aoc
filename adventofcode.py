@@ -1,14 +1,40 @@
 #!/usr/bin/env python3
 
 from dataclasses import dataclass
+from contextlib import contextmanager
 import importlib
 import os
 import sys
+import time
+
+
+class LineReader:
+
+    def __init__(self, filename: str):
+        self.filename = filename
+
+    @contextmanager
+    def integers(self):
+        try:
+            file = open(self.filename, 'r')
+            yield [int(i) for i in file.read().split('\n')[:-1]]
+        finally:
+            file.close()
+
+    @contextmanager
+    def strings(self):
+        try:
+            file = open(self.filename, 'r')
+            yield [i for i in file.read().split('\n')[:-1]]
+        finally:
+            file.close()
+
 
 class Part:
 
-    def solve(self, inputfile):
+    def solve(self, inputfile: str):
         ...
+
 
 @dataclass
 class Puzzle:
@@ -44,8 +70,10 @@ def main():
     if len (sys.argv) < 3:
         print(f'Usage: {sys.argv[0]} <year> <day>')
     else:
+        start = time.time()
         puzzle = Puzzle(year=sys.argv[1], day=sys.argv[2])
         puzzle.solve()
+        print(f'Timing: {time.time() - start} s')
 
 if __name__ == "__main__":
     main()
