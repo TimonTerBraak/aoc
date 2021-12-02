@@ -29,6 +29,16 @@ class LineReader:
         finally:
             file.close()
 
+    @contextmanager
+    def moves(self):
+        try:
+            file = open(self.filename, 'r')
+            moves = [i for i in file.read().split('\n')[:-1]]
+            pairs = [tuple(m.split(' ')) for m in moves]
+            yield [(m, int(c)) for m, c in pairs]
+        finally:
+            file.close()
+
 
 class Part:
 
