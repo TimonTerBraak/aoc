@@ -51,28 +51,26 @@ class Puzzle:
 
     year: int
     day: int
-    part1: Part
-    part2: Part
+    part1: type
+    part2: type
 
     def __init__(self, year: int, day: int):
         self.year = year
         self.day = day
 
         module = importlib.import_module(f'{year}.{day}.puzzle')
-        part1 = getattr(module, 'Part1')
-        self.part1 = part1()
-        part2 = getattr(module, 'Part2')
-        self.part2 = part2()
+        self.part1 = getattr(module, 'Part1')
+        self.part2 = getattr(module, 'Part2')
 
     def solve(self):
         print(f'Puzzle: {self.year}-{self.day}')
-        ans = self.part1.solve(os.path.join(self.year, self.day, 'example1.txt'))
+        ans = self.part1().solve(os.path.join(self.year, self.day, 'example1.txt'))
         print(f'Ex.  1: {ans}')
-        ans = self.part1.solve(os.path.join(self.year, self.day, 'input1.txt'))
+        ans = self.part1().solve(os.path.join(self.year, self.day, 'input1.txt'))
         print(f'Part 1: {ans}')
-        ans = self.part2.solve(os.path.join(self.year, self.day, 'example2.txt'))
+        ans = self.part2().solve(os.path.join(self.year, self.day, 'example2.txt'))
         print(f'Ex.  2: {ans}')
-        ans = self.part2.solve(os.path.join(self.year, self.day, 'input2.txt'))
+        ans = self.part2().solve(os.path.join(self.year, self.day, 'input2.txt'))
         print(f'Part 2: {ans}')
 
 
