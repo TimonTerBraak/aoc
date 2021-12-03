@@ -30,7 +30,7 @@ class LineReader:
             file.close()
 
     @contextmanager
-    def moves(self) -> Tuple[str, int]:
+    def moves(self) -> List[Tuple[str, int]]:
         try:
             file = open(self.filename, 'r')
             moves = file.read().split('\n')[:-1]
