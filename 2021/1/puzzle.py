@@ -1,4 +1,4 @@
-from adventofcode import Puzzle, Part, LineReader
+from adventofcode import Part, LineReader
 import sys
 
 class Part1(Part):

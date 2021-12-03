@@ -1,5 +1,4 @@
-from dataclasses import dataclass
-from adventofcode import Puzzle, Part, LineReader
+from adventofcode import Part, LineReader
 from submarine import Submarine
 
 class Part1(Part, Submarine):

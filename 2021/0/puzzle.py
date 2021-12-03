@@ -1,4 +1,4 @@
-from adventofcode import Puzzle, Part
+from adventofcode import Part
 
 class Part1(Part):
 
