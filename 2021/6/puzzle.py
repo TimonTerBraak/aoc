@@ -2,10 +2,10 @@ from adventofcode import Part, LineReader
 
 class Part1(Part):
 
-    def growrate(self, inputfile, days) -> int:
+    def solve(self, inputfile) -> int:
         with LineReader(inputfile).strings() as lines:
             lst = list(map(int,lines[0].split(',')))
-            for d in range(days):
+            for d in range(80):
                 born = list()
                 for i,day in enumerate(lst):
                     if day == 0:
@@ -14,15 +14,30 @@ class Part1(Part):
                     else:
                         lst[i] = lst[i] - 1
                 lst = lst + born
-                #print(f'After {d+1} day(s): {lst}')
             return len(lst)
-        return 0
+
+
+class Part2(Part):
 
     def solve(self, inputfile) -> int:
-        return self.growrate(inputfile, 80)
+        # initialize dictionary
+        days = dict()
+        for i in range(9):
+            days[i] = 0
 
+        # parse input
+        with LineReader(inputfile).strings() as lines:
+            lst = list(map(int,lines[0].split(',')))
+            for l in lst:
+                days[l] = days[l] + 1
 
-class Part2(Part1):
+        # calculate growth in constant memory and linear time        
+        for d in range(256):
+            new = days[0]
+            for i in range(1,9):
+                days[i-1] = days[i]
+            days[6] = days[6] + new
+            days[8] = new
 
-    def solve(self, inputfile):
-        return self.growrate(inputfile, 256)
+        return sum(days.values())
+
