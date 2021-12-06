@@ -21,9 +21,7 @@ class Part2(Part):
 
     def solve(self, inputfile) -> int:
         # initialize dictionary
-        days = dict()
-        for i in range(9):
-            days[i] = 0
+        days = dict.fromkeys([0,1,2,3,4,5,6,7,8], 0)
 
         # parse input
         with LineReader(inputfile).strings() as lines:
@@ -32,10 +30,11 @@ class Part2(Part):
                 days[l] = days[l] + 1
 
         # calculate growth in constant memory and linear time        
-        for d in range(256):
+        for _ in range(256):
             new = days[0]
-            for i in range(1,9):
-                days[i-1] = days[i]
+            for day, count in days.items():
+                if day > 0:
+                    days[day - 1] = days[day]
             days[6] = days[6] + new
             days[8] = new
 
